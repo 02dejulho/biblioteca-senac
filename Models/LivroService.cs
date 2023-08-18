@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using System.Data.Common;
+
 
 namespace Biblioteca.Models
 {
@@ -15,6 +17,7 @@ namespace Biblioteca.Models
             }
         }
 
+     
         public void Atualizar(Livro l)
         {
             using(BibliotecaContext bc = new BibliotecaContext())
@@ -22,12 +25,25 @@ namespace Biblioteca.Models
                 Livro livro = bc.Livros.Find(l.Id);
                 livro.Autor = l.Autor;
                 livro.Titulo = l.Titulo;
+                livro.Ano = l.Ano;
 
                 bc.SaveChanges();
             }
         }
 
-        public ICollection<Livro> ListarTodos(FiltrosLivros filtro = null)
+       public void DeleteLivro(int id)
+  {
+      using (var context = new BibliotecaContext())
+      {   
+          Livro livro = context.Livros.Find(id);
+          context.Livros.Remove(livro);
+          context.SaveChanges();
+      }
+  }
+
+    
+ 
+                public ICollection<Livro> ListarTodos(FiltrosLivros filtro = null)
         {
             using(BibliotecaContext bc = new BibliotecaContext())
             {

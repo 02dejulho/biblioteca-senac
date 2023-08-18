@@ -49,5 +49,26 @@ namespace Biblioteca.Controllers
             Livro l = ls.ObterPorId(id);
             return View(l);
         }
+
+    public IActionResult Exclui(int id)
+  {
+      LivroService service = new LivroService();
+      Livro livro = service.ObterPorId(id);
+
+      return View(livro);
+  }
+
+  [HttpPost]
+  public IActionResult Exclui(int id, string decisao)
+  {
+      if(decisao == "s")
+      {
+          LivroService service = new LivroService();
+          service.DeleteLivro(id);
+      }
+
+      return RedirectToAction("Listagem");
+  }
+    
     }
 }

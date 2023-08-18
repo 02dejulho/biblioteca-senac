@@ -33,13 +33,16 @@
             <tbody>
                 @foreach(Livro l in Model)
                 {
-                <tr>
+                 <tr>
                     <td>@l.Id</td>
                     <td>@l.Titulo</td>
                     <td>@l.Autor</td>
                     <td>@l.Ano</td>
-                    <td><a href="/Livro/Edicao/@l.Id">Editar</a></td>
-                </tr>
+                    <td><a href="/Livro/Edicao/@l.Id">Editar</a>
+                    <a href="/Livro/exclui/@l.Id">Excluir</a>                 
+                    
+                    </td>
+                    </tr>
                 }
             </tbody>
         </table>
