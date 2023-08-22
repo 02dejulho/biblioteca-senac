@@ -52,3 +52,4 @@ C:\Users\acjhe\OneDrive\Documentos\SENAC\modulo 2\Uc07\lucianasilva_uc07atv1\Bib
 C:\Users\acjhe\OneDrive\Documentos\SENAC\modulo 2\Uc07\lucianasilva_uc07atv1\Biblioteca\obj\Debug\netcoreapp3.1\Biblioteca.pdb
 C:\Users\acjhe\OneDrive\Documentos\SENAC\modulo 2\Uc07\lucianasilva_uc07atv1\Biblioteca\obj\Debug\netcoreapp3.1\Biblioteca.genruntimeconfig.cache
 C:\Users\acjhe\OneDrive\Documentos\SENAC\modulo 2\Uc07\lucianasilva_uc07atv1\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Livro\exclui.cshtml.g.cs
+C:\Users\acjhe\OneDrive\Documentos\SENAC\modulo 2\Uc07\lucianasilva_uc07atv1\Biblioteca\obj\Debug\netcoreapp3.1\Razor\Views\Usuarios\admin.cshtml.g.cs

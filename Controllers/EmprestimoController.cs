@@ -56,6 +56,7 @@ namespace Biblioteca.Controllers
 
         public IActionResult Edicao(int id)
         {
+            Autenticacao.CheckLogin(this);
             LivroService livroService = new LivroService();
             EmprestimoService em = new EmprestimoService();
             Emprestimo e = em.ObterPorId(id);
