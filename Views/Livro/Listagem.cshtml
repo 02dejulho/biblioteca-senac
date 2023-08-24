@@ -1,9 +1,15 @@
 @model List<Livro>
 @{
     ViewData["Title"] = "Listagem de Livros";
+    int FiltroPorPag = Int32.Parse(ViewData["livrosPorPagina"].ToString());
+    int PaginaAtual = Int32.Parse(ViewData["PaginaAtual"].ToString());
+    int NumLivrosPorPag = (Model.Count < FiltroPorPag ? Model.Count : FiltroPorPag);
+    int NumTotalDePag = Model.Count / NumLivrosPorPag + (Model.Count % NumLivrosPorPag == 0 ? 0 : 1);
 }
+
 <div class="row">
     <div class="col-md-12">
+   
     <form class="form-inline" method="POST">
         <div class="form-group mb-2">
             <select name="TipoFiltro" class="form-control">
@@ -14,37 +20,60 @@
         <div class="form-group mb-2 mx-sm-3">
             <input type="text" placeholder="Filtro" name="Filtro" class="form-control" />
         </div>
-        <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
-    </form>
-    </div>
-</div>
 
+        <div>
+            <select name="itensPorPagina" id="itensPorPagina" class="form-control"> 
+                <option value="10">10 Livros</option>
+                <option value="15">15 Livros</option>
+                <option value="30">30 Livros</option>
+                <option value="50">50 Livros</option>
+                <option value="@Model.Count">Todos</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary mb-2" style="margin-left: 10px;">Pesquisar</button>
+
+    
+<div id="SeletorPaginas">
+    <span>Página:</span>
+    @for (int i = 1; i <= NumTotalDePag; i++)
+    {
+        <span>
+            <a href="/Livro/Listagem?PaginaAtual=@i">@i</a>
+        </span>
+    }
+</div>
+</form>
 <div class="row">
     <div class="col-md-12">
         <table class="table table-striped"> 
-            <thead>
-                <tr><th>Id</th>
-                <th>Titulo</th>
-                <th>Autor</th>
-                <th>Ano</th>
-                <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach(Livro l in Model)
-                {
-                 <tr>
-                    <td>@l.Id</td>
-                    <td>@l.Titulo</td>
-                    <td>@l.Autor</td>
-                    <td>@l.Ano</td>
-                    <td><a href="/Livro/Edicao/@l.Id">Editar</a>
-                    <a href="/Livro/exclui/@l.Id">Excluir</a>                 
-                    
-                    </td>
+            @if (Model.Count > 0) {
+                <thead>
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Titulo</th>
+                        <th scope="col">Autor</th>
+                        <th scope="col">Ano</th>
+                        <th scope="col">Ação</th>
                     </tr>
-                }
-            </tbody>
+                </thead>
+                <tbody>
+                    @for(int i = (PaginaAtual - 1) * NumLivrosPorPag; i < (NumLivrosPorPag * PaginaAtual < Model.Count ? NumLivrosPorPag * PaginaAtual : Model.Count); i++){
+                      <tr scope="row">
+                          <td>@Model[i].Id</td>
+                          <td>@Model[i].Titulo</td>
+                          <td>@Model[i].Autor</td>
+                          <td>@Model[i].Ano</td>
+                          <td><a href="/Livro/Edicao/@Model[i].Id" class="btn btn-primary">Editar</a></td>
+                      </tr>  
+                    }
+                </tbody>
+            } else {
+                <div class="dnre">
+                    <p class="nre">Nenhum registro encontrado.</p>
+                    <a class="btn btn-primary" href="/Livro/Cadastro">Cadastrar livro</a>
+                </div>
+            }               
         </table>
     </div>
 </div>
