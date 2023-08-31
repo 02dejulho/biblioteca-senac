@@ -31,18 +31,16 @@ namespace Biblioteca.Models
             }
         }
 
-       public void DeleteLivro(int id)
-  {
-      using (var context = new BibliotecaContext())
-      {   
-          Livro livro = context.Livros.Find(id);
-          context.Livros.Remove(livro);
-          context.SaveChanges();
-      }
-  }
+            public void DeleteLivro(int id)
+        {
+                using (var context = new BibliotecaContext())
+            {   
+                Livro livro = context.Livros.Find(id);
+                context.Livros.Remove(livro);
+                context.SaveChanges();
+            }
+        }
 
-    
- 
                 public ICollection<Livro> ListarTodos(FiltrosLivros filtro = null)
         {
             using(BibliotecaContext bc = new BibliotecaContext())
@@ -51,7 +49,7 @@ namespace Biblioteca.Models
                 
                 if(filtro != null)
                 {
-                    //definindo dinamicamente a filtragem
+                    
                     switch(filtro.TipoFiltro)
                     {
                         case "Autor":
@@ -68,8 +66,7 @@ namespace Biblioteca.Models
                     }
                 }
                 else
-                {
-                    // caso filtro não tenha sido informado
+                {                    
                     query = bc.Livros;
                 }
                 

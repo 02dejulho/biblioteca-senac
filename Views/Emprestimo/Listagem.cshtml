@@ -1,17 +1,13 @@
 @model List<Emprestimo>
 @{
-    ViewData["Title"] = "Listagem de Empréstimos";
     string Classe = "";
+    ViewData["Title"] = "Listagem de Empréstimos";
     int FiltroPorPag = Int32.Parse(ViewData["emprestimosPorPagina"].ToString());
     int PaginaAtual = Int32.Parse(ViewData["PaginaAtual"].ToString());
     int NumEmprestimosPorPag = (Model.Count < FiltroPorPag ? Model.Count : FiltroPorPag);
-    int NumTotalDePag = Model.Count / NumEmprestimosPorPag + (Model.Count % NumEmprestimosPorPag == 0 ? 0 : 1);
+    int NumTotalDePag = Model.Count / NumEmprestimosPorPag + (Model.Count % NumEmprestimosPorPag == 0 ? 0 : 0);
+    
 }
-<style>
-    .formAlign {
-        display: flex;
-    }
-</style>
 
 <div class="row">
     <div class="col-md-12">
@@ -24,7 +20,7 @@
                 </span>
             }
         </div>
-    <form class="formAlign" method="POST">
+    <form class="form-inline" method="POST">
         <div class="form-group mb-2">
             <select name="TipoFiltro" class="form-control">
                 <option value="Usuario">Usuário</option>
@@ -43,7 +39,7 @@
                 <option value="@Model.Count">Todos</option>
             </select>
         </div>
-        <button type="submit" class="btn btn-primary mb-2" style="margin-left: 10px;">Pesquisar</button>
+        <button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
     </form>
     </div>
 </div>
@@ -72,7 +68,7 @@
                             if(Model[i].Devolvido == true) {
                                 Classe = "bg-light text-dark";
                             } else {
-                                Classe = "bg-danger text-white font-weight-bold";
+                                Classe = "text-danger font-weight-bold";
                             }
 
                         } else {
@@ -94,21 +90,23 @@
                                     <p class="text-warning font-weight-bold">Devolvido com Atraso</p>
                                 } 
                                 @if(Model[i].Devolvido == false && (System.DateTime.Compare(System.DateTime.Now, Model[i].DataDevolucao)) < 0){
-                                    <p class="text-info font-weight-bold">Em espera</p>
+                                    <p class="text-info font-weight-bold">Em Empréstimo</p>
                                 }
                                 @if(Model[i].Devolvido == false && (System.DateTime.Compare(System.DateTime.Now, Model[i].DataDevolucao)) > 0){
-                                    <p class="font-weight-bold">Pendente</p>
+                                    <p class="font-weight-bold">Devolução atrasada</p>
                                 }
                             </td>
                             <td><a href="/Emprestimo/Edicao/@Model[i].Id" class="btn btn-primary">Editar</a></td>
                         </tr>
                     }
                 </tbody>
-            } else {
-                <div class="dnre">
-                    <p class="nre">Nenhum registro encontrado.</p>
+            } 
+            
+            else 
+            {
+                    <p id="pMensagem2" class="text-danger">@ViewBag.Mensagem2</p> 
                     <a class="btn btn-primary" href="/Emprestimo/Cadastro">Cadastrar Emprestimo</a>
-                </div>
+                
             }
         </table>
     </div>

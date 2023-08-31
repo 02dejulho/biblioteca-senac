@@ -17,6 +17,15 @@ namespace Biblioteca.Models
             }
         }
 
+           public Usuario ListarId(int id)
+        {
+            using(BibliotecaContext bc = new BibliotecaContext()) 
+            
+            {
+                return bc.Usuarios.Find(id);
+            }
+        }
+
         public void IncluirUsuario(Usuario user)
         {
             using(BibliotecaContext bc = new BibliotecaContext())
@@ -40,15 +49,13 @@ namespace Biblioteca.Models
             }
         }
 
-              public void ExcluirUsuario(int Id)
-        {
-            using(BibliotecaContext bc = new BibliotecaContext())       
+       public void ExcluirUsuario(int id) 
+       {
+            using(BibliotecaContext bc = new BibliotecaContext()) 
             {
-                bc.Usuarios.Remove(bc.Usuarios.Find(Id));
-                
-            }
+                bc.Usuarios.Remove(bc.Usuarios.Find(id));
+                bc.SaveChanges();
+            }     
         }
-
-     
     }
 }

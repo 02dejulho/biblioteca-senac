@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 
+
 namespace Biblioteca.Models
 {
     public class CadEmprestimoViewModel

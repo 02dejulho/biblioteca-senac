@@ -37,7 +37,7 @@ namespace Biblioteca.Controllers
             return RedirectToAction("Listagem");
         }
 
-        public IActionResult Listagem(string tipoFiltro, string filtro, string itensPorPagina, int NumPorPagina, int PaginaAtual)
+      public IActionResult Listagem(string tipoFiltro, string filtro, string itensPorPagina, int NumPorPagina, int PaginaAtual)
         {
             Autenticacao.CheckLogin(this);
 

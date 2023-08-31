@@ -1,6 +1,8 @@
 @model Livro
 <div class="row justify-content-md-center">
+       
     <form asp-action="Cadastro" method="POST" class="col-md-4">
+        <p id="pMensagem" class="text-danger">@ViewBag.Mensagem</p> 
         <input type="hidden" asp-for="Id" />
         <div class="form-group">
             <label asp-for="Titulo">Titulo</label>
@@ -15,5 +17,6 @@
             <input asp-for="Ano" />
         </div>
         <input type="submit" value="Salvar" class="btn btn-primary"/>
-    </form>
+        </form>
+        
 </div>
